@@ -7,22 +7,7 @@ var passport = require('passport');
 var session = require('express-session');
 var moment= require('moment');
 var app = express();
-require('dotenv').load();
-require('./app/config/passport')(passport);
 app.use(express.static('public'));
-
-app.use('/common', express.static(process.cwd() + '/app/common'));
-
-app.use(session({
-	secret: 'secretClementine',
-	resave: false,
-	saveUninitialized: true
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-routes(app, passport);
 
 app.get('/:date',function(req,res){
 	var formats=['x','MMMM DD, YYYY'];
